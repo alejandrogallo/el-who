@@ -51,7 +51,7 @@
                              (cl-incf i)
                              (cl-incf i)))
                           ;; if there is no match return immediately
-                          (_ (return))))))
+                          (_ (cl-return))))))
              (when attrs
                (list (concat " "
                              (string-join attrs " ")))))
@@ -76,7 +76,7 @@
 
       ;; if it's something resembling a lisp call, just evaluate the
       ;; tree and pass the return value through el-who again
-      ((and `(,form-name . ,body)
+      ((and `(,form-name . _)
             (guard (symbolp form-name)))
        (el-who (eval tree))))))
 
