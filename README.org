@@ -55,58 +55,25 @@ leo, quis tempor ligula erat quis odio.")
 #+begin_export html
 <html>
 <head>
-<meta charset="UTF-8">
-
-</meta>
-<meta name="apple-mobile-web-app-capable" content="yes">
-
-</meta>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-</meta>
-<title>
+<meta charset="UTF-8"></meta><meta name="apple-mobile-web-app-capable" content="yes"></meta><meta name="viewport" content="width=device-width, initial-scale=1"></meta><title>
 Some title
-</title>
-<script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js">
-
-</script>
-<script src="https://unpkg.com/htmx.org@1.9.10">
-
-</script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js">
-
-</script>
-<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-
-</link>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-
-</link>
-<body>
+</title><script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script><script src="https://unpkg.com/htmx.org@1.9.10"></script><script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"></link><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"></link><body>
 <h1>
 Hello World
-</h1>
-<p>
+</h1><p>
 Fusce suscipit, wisi nec facilisis facilisis, est dui fermentum
 leo, quis tempor ligula erat quis odio.
-</p>
-<div>
-<ul>
+</p><div>
+<ul class="list">
 <li>
 Nam euismod tellus id erat.  
-</li>
-<li>
+</li><li>
 Nullam rutrum.  
 </li>
-
 </ul>
-
 </div>
-
 </body>
-
 </head>
-
 </html>
 #+end_export
 
@@ -150,28 +117,20 @@ Nullam rutrum.
 
 #+RESULTS:
 #+begin_export html
-<div>
-This and that<div>
-<form>
-<input name="deck-id" value="This and that" class="d-none invisible"/>
-<input name="card-id" value="This and that" class="d-none invisible"/>
-<span>
+<div class="card w-100">
+This and that<div class="card-footer">
+<form method="POST" action="/grade">
+<input name="deck-id" value="This and that" class="d-none invisible"/><input name="card-id" value="This and that" class="d-none invisible"/><span class="badge fs-7 bg-secondary">
 This and that
-</span>
-<span>
+</span><span class="badge fs-7 bg-secondary">
 This and that
-</span>
-<span>
+</span><span class="badge fs-7 bg-secondary">
 This and that
-</span>
-<div>
+</span><div class="btn-group float-end">
 
 </div>
-
 </form>
-
 </div>
-
 </div>
 #+end_export
 
