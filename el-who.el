@@ -76,7 +76,7 @@
 
       ;; if it's something resembling a lisp call, just evaluate the
       ;; tree and pass the return value through el-who again
-      ((and `(,form-name . _)
+      ((and `(,form-name . ,_)
             (guard (symbolp form-name)))
        (el-who (eval tree))))))
 
