@@ -12,8 +12,14 @@ On another note, this library is exceptionally easy to write and
 illustrates the usefulness of the =pcase= function in Emacs Lisp for
 manipulating lists.
 
+* Algorithm
+
+Explanation of the algorithm is as follows
+TODO
+
 * Example
 
+** 1
 #+begin_src emacs-lisp :exports both :results default html replace output 
 (let ((title "Some title"))
   (princ
@@ -103,3 +109,69 @@ Nullam rutrum.
 
 </html>
 #+end_export
+
+
+** 2
+
+#+begin_src emacs-lisp :results html output
+
+(let ((deck "This and that"))
+  (princ
+   (el-who
+    (sublis
+     '((who:str . identity)
+       (loop . cl-loop))
+     `(:div :class "card w-100"
+            (who:str deck)
+            (:div :class "card-footer"
+                  (:form :method "POST"
+                         :action "/grade"
+                         (:input :name "deck-id"
+                                 :value deck
+                                 :class "d-none invisible")
+                         (:input :name "card-id"
+                                 :value deck
+                                 :class "d-none invisible")
+
+                         (:span :class "badge fs-7 bg-secondary"
+                                (who:str deck))
+                         (:span :class "badge fs-7 bg-secondary"
+                                (who:str deck))
+                         (:span :class "badge fs-7 bg-secondary"
+                                (who:str deck))
+                         (:div :class "btn-group float-end"
+                               (loop for i below 5
+                                     collect
+                                     `(:button :class "btn btn-primary"
+                                               :value ,i
+                                               :name "grade"
+                                               (who:str ,i)))))))))))
+#+end_src
+
+#+RESULTS:
+#+begin_export html
+<div>
+This and that<div>
+<form>
+<input name="deck-id" value="This and that" class="d-none invisible"/>
+<input name="card-id" value="This and that" class="d-none invisible"/>
+<span>
+This and that
+</span>
+<span>
+This and that
+</span>
+<span>
+This and that
+</span>
+<div>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+#+end_export
+
