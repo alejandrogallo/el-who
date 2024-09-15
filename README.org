@@ -1,5 +1,105 @@
 #+title: el-who: a HTML DSL compatible with cl-who
 
-Blah 
+* Introduction
 
+This package simplifies the creation of an HTML DSL using S
+expressions, inspired by the common Lisp library CL-who.
 
+Its primary goal is to facilitate sharing HTML snippets between
+libraries, with compatibility as a key focus.
+
+On another note, this library is exceptionally easy to write and
+illustrates the usefulness of the =pcase= function in Emacs Lisp for
+manipulating lists.
+
+* Example
+
+#+begin_src emacs-lisp :exports both :results default html replace output 
+(let ((title "Some title"))
+  (princ
+   (el-who
+    `(:html
+      (:head
+       (:meta :charset "UTF-8")
+       (:meta :name "apple-mobile-web-app-capable" :content "yes")
+       (:meta :name "viewport"
+              :content "width=device-width, initial-scale=1")
+       (:title (identity title))
+       (:script :src "https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js")
+       (:script :src "https://unpkg.com/htmx.org@1.9.10")
+       (:script :src "https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js")
+       (:link :rel "stylesheet"
+              :type "text/css"
+              :href "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css")
+       (:link :rel "stylesheet"
+              :type "text/css"
+              :href "https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css")
+       (:body
+        (:h1 "Hello World")
+        (:p "Fusce suscipit, wisi nec facilisis facilisis, est dui fermentum
+leo, quis tempor ligula erat quis odio.")
+
+        (:div
+         (:ul :class "list"
+            (:li "Nam euismod tellus id erat.  ")
+            (:li "Nullam rutrum.  ")))))))))
+#+end_src
+
+#+RESULTS:
+#+begin_export html
+<html>
+<head>
+<meta charset="UTF-8">
+
+</meta>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+</meta>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</meta>
+<title>
+Some title
+</title>
+<script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js">
+
+</script>
+<script src="https://unpkg.com/htmx.org@1.9.10">
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js">
+
+</script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+</link>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+
+</link>
+<body>
+<h1>
+Hello World
+</h1>
+<p>
+Fusce suscipit, wisi nec facilisis facilisis, est dui fermentum
+leo, quis tempor ligula erat quis odio.
+</p>
+<div>
+<ul>
+<li>
+Nam euismod tellus id erat.  
+</li>
+<li>
+Nullam rutrum.  
+</li>
+
+</ul>
+
+</div>
+
+</body>
+
+</head>
+
+</html>
+#+end_export
