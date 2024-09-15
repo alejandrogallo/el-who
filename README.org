@@ -1,4 +1,4 @@
-#+title: el-who a HTML DSL compatible with cl-who
+#+title: el-who: a HTML DSL compatible with cl-who
 
 Blah 
 
