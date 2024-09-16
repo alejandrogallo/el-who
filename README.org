@@ -19,6 +19,8 @@ TODO
 
 * Example
 
+Check the tests for more examples but here are a couple:
+
 ** 1
 #+begin_src emacs-lisp :exports both :results default html replace output 
 (let ((title "Some title"))
@@ -28,8 +30,7 @@ TODO
       (:head
        (:meta :charset "UTF-8")
        (:meta :name "apple-mobile-web-app-capable" :content "yes")
-       (:meta :name "viewport"
-              :content "width=device-width, initial-scale=1")
+       (:meta :name "viewport" :content "width=device-width, initial-scale=1")
        (:title (identity title))
        (:script :src "https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js")
        (:script :src "https://unpkg.com/htmx.org@1.9.10")
@@ -80,57 +81,53 @@ Nullam rutrum.
 
 ** 2
 
-#+begin_src emacs-lisp :results html output
+#+begin_src emacs-lisp :results replace value :wrap src html :output both
 
-(let ((deck "This and that"))
-  (princ
-   (el-who
-    (sublis
-     '((who:str . identity)
-       (loop . cl-loop))
-     `(:div :class "card w-100"
-            (who:str deck)
-            (:div :class "card-footer"
-                  (:form :method "POST"
-                         :action "/grade"
-                         (:input :name "deck-id"
-                                 :value deck
-                                 :class "d-none invisible")
-                         (:input :name "card-id"
-                                 :value deck
-                                 :class "d-none invisible")
+(let ((deck "Deckoration"))
+  (el-who-cl-who
+   `(:div :class "card w-100"
+          (who:fmt "The %s" deck)
+          (:div :class "card-footer"
+                (:form :method "POST"
+                       :action "/grade"
+                       (:input :name "deck-id"
+                               :value deck
+                               :class "d-none invisible")
+                       (:input :name "card-id"
+                               :value deck
+                               :class "d-none invisible")
 
-                         (:span :class "badge fs-7 bg-secondary"
-                                (who:str deck))
-                         (:span :class "badge fs-7 bg-secondary"
-                                (who:str deck))
-                         (:span :class "badge fs-7 bg-secondary"
-                                (who:str deck))
-                         (:div :class "btn-group float-end"
-                               (loop for i below 5
-                                     collect
-                                     `(:button :class "btn btn-primary"
-                                               :value ,i
-                                               :name "grade"
-                                               (who:str ,i)))))))))))
+                       (:span :class "badge fs-7 bg-secondary"
+                              (who:str deck))
+                       (:span :class "badge fs-7 bg-secondary"
+                              (who:str deck))
+                       (:span :class "badge fs-7 bg-secondary"
+                              (who:str deck))
+                       (:div :class "btn-group float-end"
+                             (loop for i below 5
+                                   collect
+                                   `(:button :class "btn btn-primary"
+                                             :value ,i
+                                             :name "grade"
+                                             (who:str ,i)))))))))
 #+end_src
 
 #+RESULTS:
-#+begin_export html
+#+begin_src html
 <div class="card w-100">
-This and that<div class="card-footer">
+The Deckoration<div class="card-footer">
 <form method="POST" action="/grade">
-<input name="deck-id" value="This and that" class="d-none invisible"/><input name="card-id" value="This and that" class="d-none invisible"/><span class="badge fs-7 bg-secondary">
-This and that
+<input name="deck-id" value="Deckoration" class="d-none invisible"/><input name="card-id" value="Deckoration" class="d-none invisible"/><span class="badge fs-7 bg-secondary">
+Deckoration
 </span><span class="badge fs-7 bg-secondary">
-This and that
+Deckoration
 </span><span class="badge fs-7 bg-secondary">
-This and that
+Deckoration
 </span><div class="btn-group float-end">
 
 </div>
 </form>
 </div>
 </div>
-#+end_export
+#+end_src
 
