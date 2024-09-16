@@ -100,7 +100,7 @@ somewhere else."
       ;;
       ;;
       ((and (pred atom)
-            (guard (not (null tree))))
+            (pred (not null)))
        (insert (format "%s" tree)))
 
       ;;
@@ -111,7 +111,17 @@ somewhere else."
       ;;
       ((and `(,form-name . ,_)
             (guard (symbolp form-name)))
-       (el-who--engine (eval tree))))))
+       (el-who--engine (eval tree)))
+
+
+      ;;
+      ;;
+      ;; Treat '(A B C D) to just render A B C and D
+      ;;
+      ;;
+      ((and (pred listp)
+            (pred (not (null))))
+       (mapc #'el-who--engine tree)))))
 
 (defun el-who (tree)
   "Create an html string representation of the s-expression TREE."

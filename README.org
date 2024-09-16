@@ -21,35 +21,38 @@ TODO
 
 Check the tests for more examples but here are a couple:
 
-** 1
-#+begin_src emacs-lisp :exports both :results default html replace output 
+** 1 A simple case
+#+begin_src emacs-lisp :exports both :results default html replace value 
 (let ((title "Some title"))
-  (princ
-   (el-who
-    `(:html
-      (:head
-       (:meta :charset "UTF-8")
-       (:meta :name "apple-mobile-web-app-capable" :content "yes")
-       (:meta :name "viewport" :content "width=device-width, initial-scale=1")
-       (:title (identity title))
-       (:script :src "https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js")
-       (:script :src "https://unpkg.com/htmx.org@1.9.10")
-       (:script :src "https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js")
-       (:link :rel "stylesheet"
-              :type "text/css"
-              :href "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css")
-       (:link :rel "stylesheet"
-              :type "text/css"
-              :href "https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css")
-       (:body
-        (:h1 "Hello World")
-        (:p "Fusce suscipit, wisi nec facilisis facilisis, est dui fermentum
+  (el-who
+   `(:html
+     (:head
+      (:meta :charset "UTF-8")
+      (:meta :name "apple-mobile-web-app-capable" :content "yes")
+      (:meta :name "viewport" :content "width=device-width, initial-scale=1")
+      (:title (identity title))
+      (:script :src "https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js")
+      (:script :src "https://unpkg.com/htmx.org@1.9.10")
+      (:script :src "https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js")
+      (:link :rel "stylesheet"
+             :type "text/css"
+             :href "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css")
+      (:link :rel "stylesheet"
+             :type "text/css"
+             :href "https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css")
+      (:body
+       (:h1 "Hello World")
+       (:p "Fusce suscipit, wisi nec facilisis facilisis, est dui fermentum
 leo, quis tempor ligula erat quis odio.")
 
-        (:div
-         (:ul :class "list"
-            (:li "Nam euismod tellus id erat.  ")
-            (:li "Nullam rutrum.  ")))))))))
+       (:div
+        (:ul :class "list"
+             (:li "Nam euismod tellus id erat.  ")
+             (:li "Nullam rutrum.  ")
+             (let ((name "📘 el-who"))
+               (cl-loop for i below 3
+                     collect `(:li :id ,i
+                                   (format "%s 🍏 %s" ,i ,name)))))))))))
 #+end_src
 
 #+RESULTS:
@@ -70,6 +73,12 @@ leo, quis tempor ligula erat quis odio.
 Nam euismod tellus id erat.  
 </li><li>
 Nullam rutrum.  
+</li><li id="0">
+0 🍏 📘 el-who
+</li><li id="1">
+1 🍏 📘 el-who
+</li><li id="2">
+2 🍏 📘 el-who
 </li>
 </ul>
 </div>
@@ -79,52 +88,58 @@ Nullam rutrum.
 #+end_export
 
 
-** 2
+** 2 =cl-who= compatibility
+
+This showcases some https://edicl.github.io/cl-who/ compatibility.
+The function =el-who-cl-who= performs the following substitutions
+
+- =who:fmt= ⇒ =format=
+- =who:str= ⇒ =identity=
+- =who:htm= ⇒ =el-who-htm=
+- =loop= ⇒ =cl-loop=
 
 #+begin_src emacs-lisp :results replace value :wrap src html :output both
 
-(let ((deck "Deckoration"))
+(let ((deck "🍎 Deckoration"))
   (el-who-cl-who
    `(:div :class "card w-100"
           (who:fmt "The %s" deck)
           (:div :class "card-footer"
                 (:form :method "POST"
                        :action "/grade"
-                       (:input :name "deck-id"
-                               :value deck
-                               :class "d-none invisible")
                        (:input :name "card-id"
                                :value deck
                                :class "d-none invisible")
-
-                       (:span :class "badge fs-7 bg-secondary"
-                              (who:str deck))
-                       (:span :class "badge fs-7 bg-secondary"
-                              (who:str deck))
                        (:span :class "badge fs-7 bg-secondary"
                               (who:str deck))
                        (:div :class "btn-group float-end"
                              (loop for i below 5
-                                   collect
-                                   `(:button :class "btn btn-primary"
-                                             :value ,i
-                                             :name "grade"
-                                             (who:str ,i)))))))))
+                                   do
+                                   (who:htm (:button :class "btn btn-primary"
+                                                     :value i
+                                                     :name "grade"
+                                                     (who:str i))))))))))
 #+end_src
 
 #+RESULTS:
 #+begin_src html
 <div class="card w-100">
-The Deckoration<div class="card-footer">
+The 🍎 Deckoration<div class="card-footer">
 <form method="POST" action="/grade">
-<input name="deck-id" value="Deckoration" class="d-none invisible"/><input name="card-id" value="Deckoration" class="d-none invisible"/><span class="badge fs-7 bg-secondary">
-Deckoration
-</span><span class="badge fs-7 bg-secondary">
-Deckoration
-</span><span class="badge fs-7 bg-secondary">
-Deckoration
+<input name="card-id" value="🍎 Deckoration" class="d-none invisible"/><span class="badge fs-7 bg-secondary">
+🍎 Deckoration
 </span><div class="btn-group float-end">
-
+<button class="btn btn-primary" value="0" name="grade">
+0
+</button><button class="btn btn-primary" value="1" name="grade">
+1
+</button><button class="btn btn-primary" value="2" name="grade">
+2
+</button><button class="btn btn-primary" value="3" name="grade">
+3
+</button><button class="btn btn-primary" value="4" name="grade">
+4
+</button>
 </div>
 </form>
 </div>

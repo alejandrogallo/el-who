@@ -50,7 +50,12 @@
 <p></p><span></span>
 </span>
 </p>
-</p>")))
+</p>"))
+
+  (should (string= (el-who `((:p (:span)) (:p) (:p)))
+                   "<p>
+<span></span>
+</p><p></p><p></p>")))
 
 (ert-deftest el-who-test-cl:who ()
   "Tests for cl:who compattibility"
