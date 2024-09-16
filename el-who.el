@@ -7,7 +7,7 @@
 ;; Version: 1.0
 ;; Keywords: lisp, hypermedia, docs, tools, html, web
 ;; Package-Requires: ((emacs "25.1"))
-;; URL: https://github.com/alejandrogallo/p5js
+;; URL: https://github.com/alejandrogallo/el-who
 
 ;;; Commentary:
 
