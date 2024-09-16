@@ -10,11 +10,13 @@ jobs:
           - 27.1
           - 28.1
           - 29.1
-          - 29.4
+          - snapshot
     steps:
       - uses: actions/checkout@v2
       - uses: purcell/setup-emacs@master
         with:
           version: ${{ matrix.emacs-version }}
+      - name: Byte compile
+        run: emacs -Q --batch -L . --eval "(setq byte-compile-error-on-warn t)" -f batch-byte-compile *.el
       - name: Run tests
-        run: make test
+        run:  emacs -Q --batch -L . -l *-test*.el -f ert-run-tests-batch-and-exit
