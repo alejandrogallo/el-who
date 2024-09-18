@@ -12,6 +12,24 @@ On another note, this library is exceptionally easy to write and
 illustrates the usefulness of the =pcase= function in Emacs Lisp for
 manipulating lists.
 
+* Similar projects
+
+- https://github.com/philjackson/xmlgen
+  Is an excellent package and very similar to the syntax of =el-who=,
+  you can use that if you're not interested in compatibility between
+  =cl-who= and =el-who=.
+  The main difference between the two is that in =el-who=
+  s-expressions like
+  =(concat "hello" " " "world" )=,
+  i.e., where the first element of the list is a symbol and not a keyword,
+  are evaluated by the emacs-lisp evaluator.
+
+  In the case of =xmlgen= this would be interpreted as
+  #+begin_src html
+ <concat>hello world</concat>
+  #+end_src
+  which in =el-who= would be =(:concat "hello" " " "world")=.
+
 * Algorithm
 
 Explanation of the algorithm is as follows
